@@ -5,27 +5,33 @@
 #include <vector>
 using namespace std;
 
+/**
+ * Checks if the input is a palindrome
+ * @param num the number to be checked
+ * @return true if it is a palindrome, false if not
+ */
 bool isPalindrome(unsigned long long num) {
     if (num < 10) { return true;}
     string val = to_string(num);
     string firstHalf;
     string secondHalf;
 
-    if (val.length() % 2 != 0) {
+    if (val.length() % 2 != 0) { // length is even
         firstHalf = val.substr(0, val.length() / 2);
         secondHalf = val.substr((val.length() / 2)+1);
-    } else {
+    } else {                     // length is odd
         firstHalf = val.substr(0, val.length() / 2);
         secondHalf = val.substr((val.length() / 2));
     }
-    //printf("First Half: %s   |   ", firstHalf.c_str());
-    //printf("Second Half: %s\n", secondHalf.c_str());
     reverse(secondHalf.begin(), secondHalf.end());
     return firstHalf == secondHalf;
 }
 
-void
-addReverse(unsigned long long& numIn) {
+/**
+ * Takes the mirror of the input and adds the result to the input
+ * @param numIn number to modify
+ */
+void addReverse(unsigned long long& numIn) {
     string sIn = to_string(numIn);
     reverse(sIn.begin(), sIn.end());
     unsigned long long reverse = stoull(sIn);
@@ -47,17 +53,16 @@ char* process(const char* numbers) {
     strcpy(charNums, numbers);
 
     // convert char* to numbers
+    // store values in the vector 'nums'
     char* first = strtok(charNums, " ");
-
     while (first != NULL) {
         string s = first;
         unsigned long long firstInt = stoull(s);
-        //printf("INT In{%llu} STR In{%s} |||  ", firstInt, s.c_str());
         nums.push_back(firstInt);
         first = strtok (NULL, " ");
     }
 
-    // TODO write loop to add reverse to each input
+    // loop to add reverse to each input
     for (int i = 0; i < nums.size(); i++) {
         counts.push_back(0);
         counts[i] += 1;
@@ -66,7 +71,6 @@ char* process(const char* numbers) {
             counts[i] += 1;
             addReverse(nums[i]);
         }
-        //printf("INTERNAL LOOP FINISHED - count is %d for value %d\n", counts[i], nums[i]);
     }
 
 
@@ -76,10 +80,11 @@ char* process(const char* numbers) {
         sOut += to_string(counts[i]) + " " + to_string(nums[i]) + " ";
     }
     sOut.pop_back();
-    char* cPointOut = new char[sOut.length() + 1];
+    char* cPointOut = new char[sOut.length() + 1]; // delete this??
     strcpy(cPointOut, sOut.c_str());
 
     // TODO delete anything that needs to be deleted
+    // TODO try not to use unsigned long long for every single value
 
     return cPointOut;
 }
