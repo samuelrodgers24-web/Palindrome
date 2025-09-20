@@ -28,7 +28,7 @@ void
 addReverse(int& numIn) {
     string sIn = to_string(numIn);
     reverse(sIn.begin(), sIn.end());
-    int reverse = stoll(sIn);
+    int reverse = stoull(sIn);
     numIn += reverse;
 }
 
@@ -63,14 +63,22 @@ char* process(const char* numbers) {
             counts[i] += 1;
             addReverse(nums[i]);
         }
-        printf("INTERNAL LOOP FINISHED - count is %d for value %d\n", counts[i], nums[i]);
+        //printf("INTERNAL LOOP FINISHED - count is %d for value %d\n", counts[i], nums[i]);
     }
 
 
-    // TODO combine counters and final values
+    // combine counters and final values
+    string sOut = "";
+    for (int i = 0; i < nums.size(); i++) {
+        sOut += to_string(counts[i]) + " " + to_string(nums[i]) + " ";
+    }
+    sOut.pop_back();
+    char* cPointOut = new char[sOut.length() + 1];
+    strcpy(cPointOut, sOut.c_str());
 
     // TODO delete anything that needs to be deleted
-    return NULL;
+
+    return cPointOut;
 }
 
 
