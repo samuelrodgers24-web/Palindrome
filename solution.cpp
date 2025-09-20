@@ -54,16 +54,18 @@ char* process(const char* numbers) {
         first = strtok (NULL, " ");
     }
 
-    // TODO write loop to add reverse
-    //  - Do this for one number first, then all of them
-    counts.push_back(0);
-    counts[0] += 1;
-    addReverse(nums[0]);
-    while (!isPalindrome(nums[0]) && counts[0]<100) {
-        counts[0] += 1;
-        addReverse(nums[0]);
+    // TODO write loop to add reverse to each input
+    for (int i = 0; i < nums.size(); i++) {
+        counts.push_back(0);
+        counts[i] += 1;
+        addReverse(nums[i]);
+        while (!isPalindrome(nums[i]) && counts[i]<100) {
+            counts[i] += 1;
+            addReverse(nums[i]);
+        }
+        printf("INTERNAL LOOP FINISHED - count is %d for value %d\n", counts[i], nums[i]);
     }
-    //printf("LOOP FINISHED - count is %d for value %d\n", counts[0], nums[0]);
+
 
     // TODO combine counters and final values
 
