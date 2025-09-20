@@ -18,20 +18,18 @@ bool isPalindrome(int num) {
         firstHalf = val.substr(0, val.length() / 2);
         secondHalf = val.substr((val.length() / 2));
     }
-    printf("First Half: %s   |   ", firstHalf.c_str());
-    printf("Second Half: %s\n", secondHalf.c_str());
+    // printf("First Half: %s   |   ", firstHalf.c_str());
+    // printf("Second Half: %s\n", secondHalf.c_str());
     reverse(secondHalf.begin(), secondHalf.end());
     return firstHalf == secondHalf;
 }
 
 void
 addReverse(int& numIn) {
-    printf("BEFORE ADDITION: %d   |   ", numIn);
     string sIn = to_string(numIn);
     reverse(sIn.begin(), sIn.end());
     int reverse = stoi(sIn);
     numIn += reverse;
-    printf("AFTER ADDITION: %d\n", numIn);
 }
 
 char* process(const char* numbers) {
@@ -61,7 +59,11 @@ char* process(const char* numbers) {
     counts.push_back(0);
     counts[0] += 1;
     addReverse(nums[0]);
-    //while (!isPalindrome(nums[0]) && counts[0]<100) {}
+    while (!isPalindrome(nums[0]) && counts[0]<100) {
+        counts[0] += 1;
+        addReverse(nums[0]);
+    }
+    //printf("LOOP FINISHED - count is %d for value %d\n", counts[0], nums[0]);
 
     // TODO combine counters and final values
 
