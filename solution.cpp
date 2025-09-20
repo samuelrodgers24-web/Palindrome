@@ -5,7 +5,7 @@
 #include <vector>
 using namespace std;
 
-bool isPalindrome(int num) {
+bool isPalindrome(unsigned long long num) {
     if (num < 10) { return true;}
     string val = to_string(num);
     string firstHalf;
@@ -18,38 +18,41 @@ bool isPalindrome(int num) {
         firstHalf = val.substr(0, val.length() / 2);
         secondHalf = val.substr((val.length() / 2));
     }
-    // printf("First Half: %s   |   ", firstHalf.c_str());
-    // printf("Second Half: %s\n", secondHalf.c_str());
+    //printf("First Half: %s   |   ", firstHalf.c_str());
+    //printf("Second Half: %s\n", secondHalf.c_str());
     reverse(secondHalf.begin(), secondHalf.end());
     return firstHalf == secondHalf;
 }
 
 void
-addReverse(int& numIn) {
+addReverse(unsigned long long& numIn) {
     string sIn = to_string(numIn);
     reverse(sIn.begin(), sIn.end());
-    int reverse = stoull(sIn);
+    unsigned long long reverse = stoull(sIn);
     numIn += reverse;
 }
 
 char* process(const char* numbers) {
     // handle empty argument
     if (strlen(numbers) < 1) {
-        //char* s_out[] = ;
-        return NULL;
+        char* cPointOut = new char[0];
+        strcpy(cPointOut, "");
+        return cPointOut;
     }
 
     // set up variables
-    vector<int> nums;
+    vector<unsigned long long> nums;
     vector<int> counts;
     char charNums[strlen(numbers)+1];
     strcpy(charNums, numbers);
 
     // convert char* to numbers
     char* first = strtok(charNums, " ");
-    while (first != NULL)
-    {
-        int firstInt = atoi(first);
+
+    while (first != NULL) {
+        string s = first;
+        unsigned long long firstInt = stoull(s);
+        //printf("INT In{%llu} STR In{%s} |||  ", firstInt, s.c_str());
         nums.push_back(firstInt);
         first = strtok (NULL, " ");
     }
