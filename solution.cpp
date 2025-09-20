@@ -24,6 +24,16 @@ bool isPalindrome(int num) {
     return firstHalf == secondHalf;
 }
 
+void
+addReverse(int& numIn) {
+    printf("BEFORE ADDITION: %d   |   ", numIn);
+    string sIn = to_string(numIn);
+    reverse(sIn.begin(), sIn.end());
+    int reverse = stoi(sIn);
+    numIn += reverse;
+    printf("AFTER ADDITION: %d\n", numIn);
+}
+
 char* process(const char* numbers) {
     // handle empty argument
     if (strlen(numbers) < 1) {
@@ -50,7 +60,8 @@ char* process(const char* numbers) {
     //  - Do this for one number first, then all of them
     counts.push_back(0);
     counts[0] += 1;
-    while (!isPalindrome(nums[0]) && counts[0]<100) {}
+    addReverse(nums[0]);
+    //while (!isPalindrome(nums[0]) && counts[0]<100) {}
 
     // TODO combine counters and final values
 
