@@ -28,7 +28,7 @@ void
 addReverse(int& numIn) {
     string sIn = to_string(numIn);
     reverse(sIn.begin(), sIn.end());
-    int reverse = stoi(sIn);
+    int reverse = stoll(sIn);
     numIn += reverse;
 }
 
